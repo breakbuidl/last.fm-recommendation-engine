@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_save {self.email = email.downcase!}
+  before_save {self.email = self.email.downcase}
   validates :name, presence: true, length: {maximum: 50}
 
   #This helper validates that the attribute's value is unique right before the object gets saved.
