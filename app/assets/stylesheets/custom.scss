@@ -183,3 +183,10 @@ input {
   margin-top: 45px;
   @include box_sizing;
 }
+
+/* search-results */
+
+.search-results h2 {
+  text-align: left;
+  font-size: 1.6em;
+}

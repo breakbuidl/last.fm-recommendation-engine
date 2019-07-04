@@ -1,0 +1,51 @@
+<div class="center jumbotron">
+  <%= render 'layouts/search' %>
+</div>
+
+<% if params[:search_term].blank? %>
+
+  <div class="alert alert-danger" role="alert">
+    Error: Empty field!
+  </div>
+
+<% elsif @artist[:error] %>
+
+  <div class="alert alert-danger" role="alert">
+    Error: <%= @artist[:message] %>
+  </div>
+
+<% else %>
+
+  <div class="container">
+    <h1><%= link_to @artist[:name], @artist[:url] %></h1>
+  </div>
+
+  <div class="container search-results">
+    <div>
+      <h2> Biography </h2>
+      <p><%= (@artist[:bio].html_safe) %></p>
+    </div>
+
+    <div>
+      <h2>Top tracks</h2>
+      <div class="list-group">
+        <ol>
+          <% @artist[:tracks].each do |item| %>
+            <li><%= link_to item[:name], item[:url], class: "list-group-item" %></li>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+
+    <div>
+      <h2>Similar Artists</h2>
+      <div class="list-group">
+        <ul class="list-inline">
+          <% @artist[:similar].each do |item| %>
+            <li><%= link_to item[:name], item[:url], class: "list-group-item" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>
