@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    if !@user.searches.blank?
+      @user_searches = @user.searches.order('created_at DESC').group_by { |c| c.created_at.to_date }
+    end
   end
 
   def new
