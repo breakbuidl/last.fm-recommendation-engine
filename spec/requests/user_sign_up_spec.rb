@@ -6,16 +6,16 @@ RSpec.describe "User sign up", :type => :request do
     get "/signup"
     expect(response).to render_template("users/new")
 
-    post "/users", :params => { :user => {:name => "", :email => "anyemail", :password => "pass",
-                                          :password_confirmation => "pass1"} }
+    post users_path, :params => { :user => {:name => "", :email => "anyemail@test.com", :password => "pass123",
+                                          :password_confirmation => "pass124"} }
 
-    expect(response).to render_template("users/new"), "Renders"
+    expect(response).to render_template("users/new")
     expect(assigns(:user).errors).to_not be_empty
   end
 
   it "Creates an account and displays profile info when valid credentials are entered" do
-    post "/users", :params => { :user => {:name => "John Doe", :email => "john@example.com", :password => "qwerty",
-                                          :password_confirmation => "qwerty"} }
+    post users_path, :params => { :user => {:name => "John Doe", :email => "anyemail@test.com", :password => "pass123",
+                                          :password_confirmation => "pass123"} }
 
    #tests for user.save already done - User.new - model validations
    expect(response).to redirect_to(assigns(:user))
